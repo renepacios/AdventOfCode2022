@@ -29,13 +29,13 @@ foreach (var s in fileData)
             maxAmount = amount;
             maxElf = elfCount;
 
-            Console.WriteLine($"Elf {maxElf} Calories {maxAmount}");
+           // Console.WriteLine($"Elf {maxElf} Calories {maxAmount}");
         }
         //part two
         if (amount > threeElfs.Min() )
         {
             var i=Array.FindIndex(threeElfs, f => f == threeElfs.Min());
-            Console.WriteLine($"{amount} is > {threeElfs[i]}");
+            //Console.WriteLine($"{amount} is > {threeElfs[i]}");
             threeElfs[i]=amount;
         }
         amount = 0;
