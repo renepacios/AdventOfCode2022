@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\AdventUtils\AdventUtils.csproj" />
+    <ProjectReference Include="..\..\Common\AdventUtils\AdventUtils.csproj" />
   </ItemGroup>
 
   <ItemGroup>
