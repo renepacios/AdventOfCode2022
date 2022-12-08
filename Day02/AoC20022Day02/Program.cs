@@ -1,6 +1,6 @@
 ﻿using AdventUtils;
 
-var fileData = DataReader.Read("Data/input.txt", s => s.Trim());
+var fileData = DataReader.Read("Data/input.txt", s => s.Trim()).ToList();
 
 const int X = 1; //piedra     A 
 const int Y = 2; //Papel      B 
@@ -12,20 +12,46 @@ string[] Empates = { "A X", "B Y", "C Z" };
 string[] Perdidas = { "A Z", "B X", "C Y" };
 string[] Victorias = { "A Y", "B Z", "C X" };
 
-const int vitoria = 6;
+const int victoria = 6;
 const int empate = 3;
+
+
+#region  Part One
 
 int puntos = 0;
 
-int puntos2 = 0;
 
-int getScoreFormSelection(string s)
+int GetScoreFormSelection(string s)
 {
     string mySelection = s.Split(' ', StringSplitOptions.RemoveEmptyEntries)[1];
 
     return Array.IndexOf(puntuaciones, mySelection) + 1;
 
 }
+
+foreach (string s in fileData)
+{
+    if (Empates.Any(w => w == s))
+    {
+        puntos += empate;
+    }
+
+    if (Victorias.Any(w => w == s))
+    {
+        puntos += victoria;
+
+    }
+
+    int aux = GetScoreFormSelection(s);
+    puntos += aux;
+}
+
+Console.WriteLine($"Puntos {puntos}");
+
+#endregion
+
+Console.WriteLine("Part Two");
+
 
 string GetMoveFromOrigin(string s)
 {
@@ -62,45 +88,27 @@ string GetMoveFromOrigin(string s)
 
 }
 
+int puntos2 = 0;
 foreach (string s in fileData)
 {
-    if (Empates.Any(w => w == s))
-    {
-        puntos += 3;
-    }
-
-    if (Victorias.Any(w => w == s))
-    {
-        puntos += 6;
-
-    }
-
     string two = GetMoveFromOrigin(s);
+
     if (Empates.Any(w => w == two))
     {
-        puntos2 += 3;
+        puntos2 += empate;
 
     }
 
     if (Victorias.Any(w => w == two))
     {
-        puntos += 6;
+        puntos2 += victoria;
 
     }
 
-    int aux = getScoreFormSelection(s);
-    puntos += aux;
-    puntos2 += getScoreFormSelection(two); ;
-
-
-    // Console.WriteLine($"{s} {aux}  {getScoreFormSelection(two)} ");
-
-
-
+    int aux = GetScoreFormSelection(two);
+    puntos2 += aux;
 }
 
-
-Console.WriteLine($"Puntos {puntos}");
 
 Console.WriteLine($"Puntos 2 {puntos2}");
 
