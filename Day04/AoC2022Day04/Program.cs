@@ -17,9 +17,10 @@ foreach (string s in fileData)
     if (debug) Console.WriteLine($"Line: {s}");
 
     var pares = s.Split(",");
-    var p1 = pares[0].Split("-").Select(s=>Convert.ToInt32(s)).ToArray();
-    var p2 =pares[1].Split("-").Select(s=>Convert.ToInt32(s)).ToArray();
+    var p1 = pares[0].Split("-").Select(o=>Convert.ToInt32(o)).ToArray();
+    var p2 =pares[1].Split("-").Select(o=>Convert.ToInt32(o)).ToArray();
 
+    //contains
     if ((p1[0] <= p2[0] && p1[1] >= p2[1])
         || (p1[0] >= p2[0] && p1[1] <= p2[1]))
     {
