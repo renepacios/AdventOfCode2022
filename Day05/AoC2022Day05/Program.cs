@@ -2,8 +2,6 @@
 using AoC2022Day05;
 
 
-
-
 //PrintStacks(dev);
 Console.WriteLine($"Result One");
 var pilas=PartOne.DoIt();
