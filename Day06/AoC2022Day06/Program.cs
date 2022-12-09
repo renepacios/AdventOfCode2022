@@ -2,7 +2,7 @@
 using AoC2022Day06;
 
 
-const bool useTestData = false;
+const bool useTestData = true;
 
 string dataFilePath = useTestData ? "data/test.txt" : "data/input.txt";
 var fileData = DataReader.Read(dataFilePath, s => s).ToList();
