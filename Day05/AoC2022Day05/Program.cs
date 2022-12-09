@@ -1,41 +1,31 @@
 ﻿using AdventUtils;
+using AoC2022Day05;
 
 
-const bool useTestData = true;
-const bool debug = true;
-
-string dataFilePath = useTestData ? "data/test.txt" : "data/input.txt";
-var fileData = DataReader.Read(dataFilePath, s => s.Trim()).ToList();
 
 
-//part one
-Console.WriteLine("Part One");
-int result = 0;
+//PrintStacks(dev);
+Console.WriteLine($"Result One");
+var pilas=PartOne.DoIt();
 
-Stack<string> stack = new Stack<string>();
-
-foreach (string s in fileData)
+for (int i = 0; i < pilas.Length; i++)
 {
-    if (debug) Console.WriteLine($"Line: {s}");
-
-    if(string.IsNullOrEmpty(s)) break;
-
-    stack.Push(s);
+    if (pilas[i].TryPop(out var result))
+        Console.Write($"{result}");
 }
-
-
-
-Console.WriteLine($"Result {result}");
-
+Console.Write("\n\n");
 
 //part Two
 Console.WriteLine("Part Two");
-result = 0;
-//foreach (string s in fileData)
-//{
-//    if (debug) Console.WriteLine($"Line: {s}");
-//}
 
-Console.WriteLine($"Result {result}");
+pilas = PartTwo.DoIt();
+
+for (int i = 0; i < pilas.Length; i++)
+{
+    if (pilas[i].TryPop(out var result))
+        Console.Write($"{result}");
+}
+Console.Write("\n\n");
+
 
 Console.ReadLine();
