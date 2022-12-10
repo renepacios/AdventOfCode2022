@@ -15,4 +15,11 @@ Console.WriteLine($"Result One  --> {res1}");
 
 Console.Write("\n\n");
 
+
+Console.WriteLine($"Part Two");
+var res2 = PartTwo.DoIt(fileData);
+Console.WriteLine($"Result   --> {res2}");
+
+
+
 Console.ReadLine();
