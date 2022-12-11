@@ -3,7 +3,7 @@
 using AdventUtils;
 using AoC2022Day07;
 
-const bool useTestData = false;
+const bool useTestData = true;
 
 string dataFilePath = useTestData ? "data/test.txt" : "data/input.txt";
 var fileData = DataReader.Read(dataFilePath, s => s).ToList();
@@ -48,7 +48,25 @@ Console.Write("\n\n");
 Console.WriteLine($"Total Size {folders.Sum(s => s.Size)}");
 
 //part Two
-//Console.WriteLine("Part Two");
+Console.WriteLine("Part Two");
+var allFiles = GetFoldersWhere(currentFolder.GetRootItem().SubItems, w => w.Type==ItemFile.ItemType.File)
+    //.OrderBy(o=>o.Size)
+    .ToList();
+
+long total = allFiles.Sum(s=>s.Size);
+long unUsedSpace = 70000000 - total;
+long necesary = 30000000 - unUsedSpace;
+
+Console.WriteLine($"Total Used: {total} Unused: {unUsedSpace} Necesary: {necesary}");
+
+//foreach (ItemFile itemFile in allFolders.Where(w=>w.Size>= necesary))
+//{
+//    Console.WriteLine($"\nFolder: {itemFile.Name} - {itemFile.Size}");
+//}
+
+//var item = allFolders.FirstOrDefault(w => w.Size >= necesary);
+//Console.WriteLine($"Folder: {item.Name} - {item.Size}");
+
 //foreach (var l in fileData)
 //{
 //    var res1 = PartTwo.DoIt(l);
