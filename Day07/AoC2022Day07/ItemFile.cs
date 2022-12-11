@@ -4,9 +4,11 @@ internal class ItemFile
 {
     public enum ItemType
     {
-        File=0,
-        Directory=1
+        File = 0,
+        Directory = 1
     }
+
+    public bool IsDirectory => Type == ItemType.Directory;
 
     public ItemFile Parent;
     public List<ItemFile> SubItems { get; set; }
@@ -24,7 +26,7 @@ internal class ItemFile
         }
     }
 
-    private long FileSize {  get; set; }
+    private long FileSize { get; set; }
 
 
 
@@ -40,23 +42,23 @@ internal class ItemFile
     {
         Parent = parent;
         SubItems = new List<ItemFile>();
-        FileSize= size;
-        Type= ItemType.File;
+        FileSize = size;
+        Type = ItemType.File;
     }
 
     public void AddSubItem(string line)
     {
-        var item=new ItemFile(this);
+        var item = new ItemFile(this);
 
         if (line.StartsWith("dir"))
         {
             item.Type = ItemType.Directory;
-            item.Name=line.Replace("dir ",string.Empty).Trim();
+            item.Name = line.Replace("dir ", string.Empty).Trim();
         }
         else
         {
             var file = line.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-            item.Type= ItemType.File;
+            item.Type = ItemType.File;
             item.FileSize = Convert.ToInt64(file[0]);
             item.Name = file[1];
         }
