@@ -17,17 +17,22 @@ PartOne.DoIt(fileData, currentFolder);
 
 IEnumerable<ItemFile> GetFoldersWhere(List<ItemFile> fols, Func<ItemFile, bool> whereFunc)
 {
+    if (fols.Any(w => w.SubItems.AnyNotNull(w => w.IsDirectory)))
+    {
+
+        var subfolders = fols.SelectMany(s => s.SubItems.Where(w => w.IsDirectory)).ToList();
+
+        var foldersWhere = GetFoldersWhere(subfolders, whereFunc);
+        foreach (var itemFile in foldersWhere)
+        {
+            yield return itemFile;
+        }
+    }
+
     var foldersToDev = fols.Where(whereFunc);
     foreach (var itemFile in foldersToDev)
     {
         yield return itemFile;
-
-        var subItems = GetFoldersWhere(itemFile.SubItems, whereFunc);
-
-        foreach (var subItem in subItems)
-        {
-            yield return subItem;
-        }
     }
 }
 
